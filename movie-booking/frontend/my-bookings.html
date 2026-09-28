@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View and manage your movie ticket reservations.">
+  <title>My Bookings - MovieBook</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar" id="mainNavbar">
+      <div class="container nav-container">
+        <a href="index.html" class="brand-logo" id="brandLogo">
+          🎬 <span class="gradient-text">MovieBook</span>
+          <span class="brand-badge">DevOps Edition</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="nav-link" id="navHome">Home</a></li>
+          <li><a href="movies.html" class="nav-link" id="navMovies">Movies</a></li>
+          <li><a href="my-bookings.html" class="nav-link active" id="navMyBookings">My Bookings</a></li>
+        </ul>
+
+        <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+          ☰
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container" style="padding-top: 36px;">
+      
+      <!-- Section Header -->
+      <div class="section-title-wrap">
+        <div>
+          <h1 class="section-title">My Bookings & Tickets</h1>
+          <p class="section-subtitle">Real-time reservations fetched via Express & MongoDB API (GET /api/bookings)</p>
+        </div>
+        <div>
+          <span class="badge badge-genre" id="bookingsCountBadge" style="font-size: 0.85rem; padding: 6px 14px;">
+            Loading tickets...
+          </span>
+        </div>
+      </div>
+
+      <!-- Bookings List Container -->
+      <div class="bookings-list" id="bookingsListContainer">
+        <div class="spinner"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 8px;">
+            🎬 <span class="gradient-text">MovieBook</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 320px;">
+            Decoupled DevOps movie ticket booking system.
+          </p>
+        </div>
+        <div class="footer-devops-badge">
+          ⚡ REST Endpoints: GET /api/bookings & DELETE /api/bookings/:id
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 MovieBook. Built with Vanilla HTML, CSS, JavaScript, Node.js & MongoDB.
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/my-bookings.js"></script>
+</body>
+</html>

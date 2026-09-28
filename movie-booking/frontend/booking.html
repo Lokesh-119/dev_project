@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Select seats and confirm your movie ticket booking with MovieBook.">
+  <title>Book Seats - MovieBook</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar" id="mainNavbar">
+      <div class="container nav-container">
+        <a href="index.html" class="brand-logo" id="brandLogo">
+          🎬 <span class="gradient-text">MovieBook</span>
+          <span class="brand-badge">DevOps Edition</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="nav-link" id="navHome">Home</a></li>
+          <li><a href="movies.html" class="nav-link" id="navMovies">Movies</a></li>
+          <li><a href="my-bookings.html" class="nav-link" id="navMyBookings">My Bookings</a></li>
+        </ul>
+
+        <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+          ☰
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container" style="padding-top: 32px;">
+      
+      <!-- Movie Header Strip -->
+      <div style="margin-bottom: 24px;">
+        <a href="movies.html" class="btn btn-secondary" style="margin-bottom: 16px; font-size: 0.85rem; padding: 6px 14px;">
+          ← Back to Movies
+        </a>
+        <h1 class="section-title" id="movieHeaderTitle">Loading Movie Details...</h1>
+        <p class="section-subtitle" id="movieHeaderDuration"></p>
+        <p style="color: var(--text-secondary); margin-top: 8px; max-width: 800px; font-size: 0.95rem;" id="movieHeaderDesc"></p>
+      </div>
+
+      <!-- Booking Layout: Seat Theatre on Left, Summary Card on Right -->
+      <div class="booking-layout">
+        
+        <!-- Theatre Section -->
+        <div class="theatre-card">
+          
+          <!-- Curved Cinema Screen -->
+          <div class="screen-container">
+            <div class="screen-arc"></div>
+            <div class="screen-label">CINEMA SCREEN THIS WAY</div>
+          </div>
+
+          <!-- Seat Status Legend -->
+          <div class="seat-legend">
+            <div class="legend-item">
+              <div class="legend-box available"></div>
+              <span>Available</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box selected"></div>
+              <span>Selected</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box booked"></div>
+              <span>Booked</span>
+            </div>
+          </div>
+
+          <!-- Interactive Seat Matrix (Rows A - E, Columns 1 - 8) -->
+          <div class="seat-matrix" id="seatMatrix">
+            <div class="spinner"></div>
+          </div>
+
+          <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 16px;">
+            💡 Click on any available seat to select or deselect. You can select multiple seats for your party.
+          </p>
+        </div>
+
+        <!-- Checkout / Summary Card -->
+        <aside class="summary-card">
+          <div class="movie-mini-preview">
+            <img src="" alt="Movie Poster" class="mini-poster" id="summaryMoviePoster">
+            <div class="mini-details">
+              <h3 id="summaryMovieTitle">Movie</h3>
+              <div class="movie-meta-tags" id="summaryMovieMeta"></div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                Price / Ticket: <strong id="ticketPriceDisplay" style="color: var(--primary);">₹150</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking Form -->
+          <form id="bookingForm">
+            
+            <div class="form-group">
+              <label class="form-label" for="customerNameInput">Customer Name *</label>
+              <input 
+                type="text" 
+                class="form-input" 
+                id="customerNameInput" 
+                placeholder="Enter your full name (e.g. Lokesh)" 
+                required 
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Selected Seats (<span id="selectedCountDisplay">0</span>)</label>
+              <div class="selected-seats-box" id="selectedSeatsDisplay">
+                <span style="color: var(--text-muted); font-size: 0.88rem;">No seats selected yet.</span>
+              </div>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="price-breakdown">
+              <div class="price-row">
+                <span>Standard Seat Price</span>
+                <span id="seatUnitPrice">₹150</span>
+              </div>
+              <div class="price-row">
+                <span>Convenience Fee</span>
+                <span style="color: var(--emerald);">FREE (DevOps Demo)</span>
+              </div>
+              <div class="price-row total">
+                <span>Total Amount:</span>
+                <span class="total-amount-display" id="totalAmountDisplay">₹0</span>
+              </div>
+            </div>
+
+            <!-- Confirm Booking Button -->
+            <button type="submit" class="btn btn-primary btn-block" id="confirmBookingBtn" disabled>
+              Select Seats to Proceed
+            </button>
+          </form>
+
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Booking Confirmation Modal -->
+  <div class="modal-backdrop" id="confirmationModal">
+    <div class="modal-box">
+      <div class="modal-icon">✓</div>
+      <h2 class="modal-title">Booking Confirmed!</h2>
+      <p class="modal-subtitle">Your movie tickets have been reserved successfully.</p>
+
+      <div class="receipt-ticket">
+        <div class="receipt-row">
+          <span class="receipt-label">Booking Reference:</span>
+          <span id="receiptBookingId" style="font-family: monospace; font-weight: 700; color: #a5b4fc;">MB-XXXXXX</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Movie:</span>
+          <strong id="receiptMovieTitle">Movie Name</strong>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Customer Name:</span>
+          <span id="receiptCustomerName">Lokesh</span>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Selected Seats:</span>
+          <strong id="receiptSeats" style="color: var(--primary);">A1, A2</strong>
+        </div>
+        <div class="receipt-row">
+          <span class="receipt-label">Booking Time:</span>
+          <span id="receiptDate">Just now</span>
+        </div>
+        <div class="receipt-row">
+          <span>Total Paid:</span>
+          <span id="receiptTotal" style="color: var(--emerald);">₹300</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <a href="my-bookings.html" class="btn btn-primary" style="flex: 1;">
+          View in My Bookings
+        </a>
+        <a href="movies.html" class="btn btn-secondary" style="flex: 1;">
+          Book Another
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 8px;">
+            🎬 <span class="gradient-text">MovieBook</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 320px;">
+            Real-time seat reservations with RESTful backend integration.
+          </p>
+        </div>
+        <div class="footer-devops-badge">
+          ⚡ REST Endpoint: POST /api/bookings
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 MovieBook. Built with Vanilla HTML, CSS, JavaScript, Node.js & MongoDB.
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/booking.js"></script>
+</body>
+</html>

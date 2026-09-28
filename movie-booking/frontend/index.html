@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MovieBook - Modern Cinema Ticket Booking Platform. Explore trending movies, choose seats, and book tickets instantly.">
+  <title>MovieBook - Book Cinema Tickets Online</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar" id="mainNavbar">
+      <div class="container nav-container">
+        <a href="index.html" class="brand-logo" id="brandLogo">
+          🎬 <span class="gradient-text">MovieBook</span>
+          <span class="brand-badge">DevOps Edition</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" class="nav-link active" id="navHome">Home</a></li>
+          <li><a href="movies.html" class="nav-link" id="navMovies">Movies</a></li>
+          <li><a href="my-bookings.html" class="nav-link" id="navMyBookings">My Bookings</a></li>
+        </ul>
+
+        <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+          ☰
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero" id="heroSection">
+      <div class="hero-glow"></div>
+      <div class="container hero-content">
+        <div class="hero-tag">✨ Dolby Atmos & 4K Laser Screening</div>
+        <h1 class="hero-title">Experience Movies Like Never Before</h1>
+        <p class="hero-subtitle">
+          Find current releases, select your favorite cinema seats, and get instant ticket confirmations.
+        </p>
+
+        <!-- Search Box -->
+        <div class="search-wrapper">
+          <form class="search-input-box" id="heroSearchForm">
+            <span class="search-icon">🔍</span>
+            <input 
+              type="text" 
+              class="search-input" 
+              id="heroSearchInput" 
+              placeholder="Search movies by title, genre, or keyword..." 
+              autocomplete="off"
+            />
+            <button type="submit" class="btn btn-primary" id="heroSearchBtn">Search</button>
+          </form>
+        </div>
+
+        <!-- Highlights Strip -->
+        <div class="hero-features">
+          <div class="hero-feature-item">
+            <span>🎟️</span> <span>Instant Seat Selection</span>
+          </div>
+          <div class="hero-feature-item">
+            <span>⚡</span> <span>Fast REST API Booking</span>
+          </div>
+          <div class="hero-feature-item">
+            <span>🛡️</span> <span>DevOps & Microservices Ready</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Movies Section -->
+    <section class="container" style="padding-top: 20px;">
+      <div class="section-title-wrap">
+        <div>
+          <h2 class="section-title">Featured Movies</h2>
+          <p class="section-subtitle">Catch the biggest blockbusters showing in theatres this week</p>
+        </div>
+        <a href="movies.html" class="btn btn-secondary" id="viewAllMoviesBtn">
+          View All Movies →
+        </a>
+      </div>
+
+      <!-- Grid loaded dynamically by main.js via GET /api/movies -->
+      <div class="movies-grid" id="featuredMoviesGrid">
+        <div class="spinner"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 8px;">
+            🎬 <span class="gradient-text">MovieBook</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 320px;">
+            A decoupled full-stack cinema ticketing web application designed for learning and mastering modern DevOps practices.
+          </p>
+        </div>
+        <div class="footer-devops-badge">
+          🚀 Frontend: Port 5500 | Backend: Port 5000 (Express & MongoDB)
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 MovieBook. Built with Vanilla HTML, CSS, JavaScript, Node.js & MongoDB.
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
