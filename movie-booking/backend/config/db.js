@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
  * Connect to MongoDB using the connection string from environment variables
  */
 const connectDB = async () => {
-  try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/movie-booking';
+    // Read from process.env.MONGODB_URI or process.env.MONGO_URI (DevOps best practice)
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/movie-booking';
     const conn = await mongoose.connect(mongoUri);
 
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);

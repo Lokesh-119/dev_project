@@ -88,7 +88,7 @@ const sampleMovies = [
 
 const seedData = async () => {
   try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/movie-booking';
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/movie-booking';
     await mongoose.connect(mongoUri);
     console.log('Connected to MongoDB for seeding...');
 
